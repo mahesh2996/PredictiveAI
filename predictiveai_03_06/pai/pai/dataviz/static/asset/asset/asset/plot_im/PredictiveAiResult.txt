@@ -1,0 +1,10 @@
+Algorithm:Linear Regression
+Hyper Tuning Parameters:{'fit_intercept': 'bool', 'normalize': 'bool'}
+Model Accuracy:38.79
+
+Thank you for visiting us.
+Contact Us:predictiveai.tech@gmail.com
+Ph:+91 9994381272
+Test Result:
+
+[6829.087781653687]

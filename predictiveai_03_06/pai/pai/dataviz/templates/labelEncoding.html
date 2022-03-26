@@ -1,0 +1,123 @@
+{% extends 'index1.html' %}
+{% block title %}
+Encoding@Dart
+{% endblock %}
+{% block body %}
+<script>
+    function radioFlip(ele)
+    {
+        if (ele.previous) {
+            ele.checked = false;
+        }
+        ele.previous = ele.checked;
+    }
+</script>
+<div>
+   <nav class="top-right open">
+	<a class="disc l1" href="/download/processed/{{fName}}">
+		<div>Download</div>
+	</a>
+	<a class="disc l2"  href="/prediction/{{fName}}">
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  href="/visualizer3/{{fName}}" >
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4"  href="/preprocess/{{fName}}">
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+
+<div class="main-title1">
+ <center class=" jumbotron cont2 container cd p-3 my-3 bg-warning text-white"  >
+<center style=" line-height:1.3;" class="blinking tex ">Encoding Methods</center>
+<p style="color:black; line-height: 1.8; text-align:right;font-size:17px; font-family: 'Comic Sans MS'; " >~Feature Engineering is an art</p>
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+     <div style=" height: 250px; overflow:auto;">
+    <div class="container  z-depth-1 a cde" >
+        <table  class="table table-dark table-hover" >
+                <thead >
+                    <tr>
+                        <th>Value</th>
+                        <th>Data Type</th>
+                         <th>Label</th>
+                        <th>One Hot</th>
+
+                         <th>Helmert</th>
+                        <th>Backward Differece</th>
+                        <th>Binary Encoder</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    {% for feature, type in featureList %}
+                    <tr>
+                        <td>{{feature}}</td>
+                        <td>{{type}}</td>
+                        <td>
+                            <label>
+                                <input name="{{feature}}" type="radio" value="label" onclick="radioFlip(this)" {% if type == 'Numeric' %}disabled{% endif %}/>
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input name="{{feature}}" type="radio" value="oneHot" onclick="radioFlip(this)" {% if type == 'Numeric' %}disabled{% endif %}/>
+                                <span></span>
+                            </label>
+                        </td>
+
+                        <td>
+                            <label>
+                                <input name="{{feature}}" type="radio" value="helmert" onclick="radioFlip(this)" {% if type == 'Numeric' %}disabled{% endif %}/>
+                                <span></span>
+                            </label>
+                        </td>
+                         <td>
+                            <label>
+                                <input name="{{feature}}" type="radio" value="ceb" onclick="radioFlip(this)" {% if type == 'Numeric' %}disabled{% endif %}/>
+                                <span></span>
+                            </label>
+                        </td>
+                         <td>
+                            <label>
+                                <input name="{{feature}}" type="radio" value="binary" onclick="radioFlip(this)" {% if type == 'Numeric' %}disabled{% endif %}/>
+                                <span></span>
+                            </label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+
+ </div>
+    </div>
+    <br>
+    <div class="sticky center">
+                 <button style="letter-spacing:2px; text-decoration:none;background-color:white;" type="submit" class="btn1 rounded button5"><span class="text-green">Save</span></button>
+
+                &nbsp;&nbsp;       <a style="letter-spacing:2px; text-decoration:none;background-color:white; "class="btn1 rounded button5" href="/view/{{fName}}/"><span class="text-green">View Data</span></a>
+                    &nbsp;&nbsp;            <a style="letter-spacing:2px; text-decoration:none;background-color:white;"class="btn1 rounded button5" href="/preprocess/{{fName}}/"><span class="text-green">Continue</span></a>
+
+    </div>
+
+</form>
+
+       </center>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% block title %}
+clustering@dart
+{% endblock %}
+{% block body %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="center container">
+        <h6>
+            Technique: 
+            <label>
+                <input name="technique" type="radio" value="kMeans" checked/>
+                <span>K-Means</span>
+            </label>
+            <label>
+                <input name="technique" type="radio" value="dbScan"/>
+                <span>DBSCAN</span>
+            </label>
+            <label>
+                <input name="technique" type="radio" value="meanShift"/>
+                <span>Mean-shift</span>
+            </label>
+        </h6>
+        <input type="number" name="clusters" style="width:150px; margin: 10px;" placeholder="No Of Clusters" value="{{n_clusters}}" required/>
+        <input type="submit" class="btn waves-effect waves-light green" style="margin:10px;" value="Start"/>
+    </div>
+</form>
+<div class="z-depth-2" style="overflow: auto; margin:5%;" >
+    <table class="striped centered">
+        <thead class="#eeeeee grey lighten-2">
+            <tr>
+                {% for ele in featureNames %}
+                <th  style="border: 1px solid;">{{ele}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody class="#eeeeee grey lighten-4">
+            {% for center in centers %}
+            <tr>
+            {% for ele in center %}
+                <td style="border: 1px solid;">{{ele}}</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

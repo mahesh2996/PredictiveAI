@@ -1,0 +1,140 @@
+
+    {% extends 'index1.html' %}
+{% block title %}
+FAQ@Dart
+{% endblock %}
+
+
+{% block body %}
+
+<div>
+   <nav class="top-right open">
+	<a class="disc l1" >
+		<div>Download</div>
+	</a>
+	<a class="disc l2"  >
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  >
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4" >
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+<div class="main-title1"style="line-height: 1.8; text-align:left;font-size:17px; font-family: 'Comic Sans MS'; " class="text-white" >
+<div style="max-width:100%;background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);"class="jumbotron p-3 my-3 text-black">
+
+            <center style=" line-height:1.3;"style="line-height: 1.8;font-size:18px; font-family: 'Comic Sans MS'; " class="text-white"><b>FAQ</b></center>
+             <div >
+
+
+
+<div class="accordion">
+  <div class="accordion-item">
+    <div class="accordion-item-header">
+      What is Predictiveai.tech?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+Predictiveai.tech is a WebApp for Predictive Analytics. Currrently providing a service called DART(Data art) which gives a GUI interface for Data Analyse, Pre-process ,Visualize and use some basic algorithms over the Data for Prediction.      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-item-header">
+      What type of file can i upload?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+          You can upload files with .csv, .xlsx or .json formats.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-item-header">
+      What is Target column?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+        The target column contain whatever the output of the input variables. It could be the individual classes that the input variables maybe mapped to in case of a classification problem or the output value range in a regression problem.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-item-header">
+      What is Primary column?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+          A primary column is a column of table which uniquely identifies each tuple (row) in that table.
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-item-header">
+      What is Categorical column?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+          Categorical column represent types of data which may be divided into groups. Examples of categorical variables are race, sex, age group, and educational level.
+      </div>
+    </div>
+  </div>
+   <div class="accordion-item">
+    <div class="accordion-item-header">
+      What is EDA?
+    </div>
+    <div class="accordion-item-body">
+      <div class="accordion-item-body-content">
+           Exploratory data analysis (EDA) is an approach to analyzing data sets to summarize their main characteristics, often with visual methods.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script >
+    const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
+
+accordionItemHeaders.forEach(accordionItemHeader => {
+  accordionItemHeader.addEventListener("click", event => {
+
+    // Uncomment in case you only want to allow for the display of only one collapsed item at a time!
+
+    // const currentlyActiveAccordionItemHeader = document.querySelector(".accordion-item-header.active");
+    // if(currentlyActiveAccordionItemHeader && currentlyActiveAccordionItemHeader!==accordionItemHeader) {
+    //   currentlyActiveAccordionItemHeader.classList.toggle("active");
+    //   currentlyActiveAccordionItemHeader.nextElementSibling.style.maxHeight = 0;
+    // }
+
+    accordionItemHeader.classList.toggle("active");
+    const accordionItemBody = accordionItemHeader.nextElementSibling;
+    if(accordionItemHeader.classList.contains("active")) {
+      accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+    }
+    else {
+      accordionItemBody.style.maxHeight = 0;
+    }
+
+  });
+});
+    </script>
+
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

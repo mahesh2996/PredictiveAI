@@ -1,0 +1,80 @@
+{% extends 'index1.html' %}
+{% block title %}
+FutureSelection@Dart
+{% endblock %}
+{% block body %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">Select Criterion:</div>
+            <div class="col">
+                <label>
+                    <input name="criterion" type="radio" value="gini" checked/>
+                    <span>gini</span>
+                </label>
+                <label>
+                    <input name="criterion" type="radio" value="entropy"/>
+                    <span>entropy</span>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                max_leaf_nodes:
+            </div>
+            <div class="col">
+                <input type="number" name="max_leaf_nodes" style="height:25px;" value="{{max_leaf_nodes}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <select name="selected-feature" class="browser-default" style="width:max-content;height:38px;">
+                    <option value="">Select Feature Classs</option>
+                    {% for feature in featureNames %}
+                    <option value="{{feature}}" {% if feature == selectedFeature %}selected{% endif %}>{{feature}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn waves-effect waves-light green" >Show Feature Imporatance</button>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% if selectedFeature != ''%}
+    <div class="container center z-depth-1">
+        <div style="overflow-x:auto;">
+            <table class="striped centered">
+                <thead class="#eeeeee grey lighten-2">
+                    <tr>
+                        <th>Value</th>
+                        <th>Feature Importance</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="#eeeeee grey lighten-4">
+                    {% for feature, c in featureList %}
+                    <tr>
+                        <td>{{feature}}</td>
+                        <td>{{c}}</td>
+                        <td>
+                            <label>
+                                <input type="checkbox" class="filled-in" name="toDelete" value="{{feature}}" />
+                                <span></span>
+                            </label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="sticky center">
+        <button type="submit" class="btn-large waves-effect waves-light red" style="margin:0px 10px 10px 10px;">Delete Feature</button>
+    </div>
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,350 @@
+{% extends 'index1.html' %}
+{% block title %}
+Visualization@Dart
+{% endblock %}
+{% block body %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-1.4.0.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.4.0.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.4.0.min.css" rel="stylesheet" type="text/css">
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-1.4.0.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.4.0.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-1.4.0.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-api-1.4.0.min.js"></script>
+<div>
+   <nav class="top-right open">
+	<a class="disc l1" href="/download/processed/{{fName}}">
+		<div>Download</div>
+	</a>
+	<a class="disc l2"  href="/prediction/{{fName}}" target="_blank">
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  href="/visualizer3/{{fName}}" target="_blank">
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4"  href="/preprocess/{{fName}}"target="_blank">
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+
+
+<div class="main-title1" >
+<div style="max-width:100%;"class="jumbotron cont1 container p-3 my-3 bg-dark text-black">
+
+<center style=" line-height:1.3;" class="blinking tex ">Exploratory Data Analysis</center>
+    <div style="max-width:100%; max-height: 100%; overflow:hidden;">
+
+    {% csrf_token %}
+    <div class="container  z-depth-1 a cde" >
+     <div >
+<center >
+    <div >
+    <select id="myText" name="vizmethod">
+        <option value="BarChart">Bar-Chart</option>
+        <option value="ScatterCategorical">Scatter(Categorical)</option>
+
+        <option value="lm-Plot">LinearRegresson-Plot</option>
+      <!--  <option value="Violin-Plot">Violin-Plot</option>-->
+
+        <option value="Count-Plot">Count-Plot</option>
+    <!--    <option value="Histogram">Histogram</option>-->
+        <!--<option value="Distibution-Plot">Distribution-Plot</option>
+        <option value="Line-Plot">Line-Plot</option>-->
+        <option value="Heat-map">Heat-map</option>
+      <!--  <option value="Pie-chart">Pie-chart</option>
+        <option value="3D-Scatter">3D Scatter</option>-->
+        <option value="ScatterNumerical">Scatter(Numerical)</option>
+        <option value="Box-Plot">Box-Plot</option>
+        <option value="Pair-Plot">Pair-Plot</option>
+    </select>
+  <button onclick="myFunction()" style="letter-spacing:2px; text-decoration:none;background-color:white;" type="submit" class="btn1 btn-sm rounded button5"><span class="text-green">Continue</span></button><br>
+                <a style="letter-spacing:2px; text-decoration:none;background-color:white;"class="btn1 btn-sm rounded button5" href="/preprocess/{{fName}}" ><span class="text-green">Preprocessing</span></a>
+                  &nbsp; &nbsp; <a style="letter-spacing:2px; text-decoration:none;background-color:white;"class="btn1 btn-sm rounded button5" href="/prediction/{{fName}}" target="_blank" ><span class="text-green">Prediction</span></a>
+
+
+    </div>
+    </center>
+         <br>
+
+<form method="post" id="bar_0" enctype="multipart/form-data">
+    {% csrf_token %}
+   <input type="hidden" name="form_type" value="bar_0">
+<div id="myDIV10" style="display:none;" >
+ <center>
+     <label for="c10"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+ <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c10"type="text"  name="vid" value="barchart" readonly>
+
+     </center><br>
+
+
+     <label for="c11"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">x-axis(categorical):</label>
+
+       <select style="width:40%;color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c11" required>
+      {% for feature in cfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+     <br>
+       <label for="12"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">y-axis(numerical):</label>
+
+    <select name="y" id="12"style=" height:85px; width:200px;font-size:17px; font-family: 'Comic Sans MS'; " class="custom-select my-1 mr-sm-2 bg-dark text-white"id="multiple-checkboxes" multiple="multiple" required>
+
+       {% for feature in nfeat %}
+      <option value="{{feature}}">{{feature}}</option>
+      {% endfor %}
+    </select>
+<br><br>
+              <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+</div>
+
+</form>
+         <form method="post" id="scatter_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="scatter_0">
+ <div id="myDIV11"style="display:none;">
+     <center>
+     <label for="c25"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c25" type="text"  name="vid" value="scatterC" readonly>
+     </center><br>
+      <label for="c24"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">x-axis(numerical):</label>
+
+       <select style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c24" required>
+      {% for feature in nfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+      <label for="c22"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">y-axis(numerical):</label>
+
+       <select style="width:40%;color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="y" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c22" required>
+      {% for feature in nfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+      <label for="c21"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Group column(categorical):</label>
+       <select style=" float:left;width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c21" required>
+
+      {% for feature in cfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select>
+
+                       <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+</div>
+
+         </form>
+
+
+         <form method="post" id="lm_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="lm_0">
+ <div id="myDIV12"style="display:none;">
+     <center>
+     <label for="c71"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c71" type="text"  name="vid" value="Linear Regression Plot" readonly>
+     </center><br>
+      <label for="c72"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">x-axis(numerical):</label>
+
+       <select style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c72" required>
+      {% for feature in nfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+      <label for="c73"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">y-axis(numerical):</label>
+
+       <select style="width:40%;color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="y" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c73" required>
+      {% for feature in nfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+
+
+                       <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+</div>
+
+         </form>
+
+
+<div id="myDIV13"style="display:none;">
+    <input type="text"  name="vid" value="cat-violin" readonly>
+</div>
+
+                  <form method="post" id="count_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="count_0">
+ <div id="myDIV14"style="display:none;">
+     <center>
+     <label for="c81"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c81" type="text"  name="vid" value="Count Plot" readonly>
+     </center><br>
+      <label for="c82"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">x-axis(numerical):</label>
+
+       <select style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c82" required>
+      {% for feature in feat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+
+
+                       <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+</div>
+
+         </form>
+
+
+<div id="myDIV15"style="display:none;">
+    <input type="text"  name="vid" value="hist" readonly>
+
+</div>
+
+<div id="myDIV16"style="display:none;">
+    <input type="text"  name="vid" value="dist" readonly>
+
+</div>
+
+<div id="myDIV17"style="display:none;">
+    <input type="text"  name="vid" value="line" readonly>
+
+</div>
+
+
+             <form method="post" id="heat_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="heat_0">
+<div id="myDIV18"style="display:none;">
+    <input type="text"  name="vid"  value="Heap-Map" readonly>
+ <center>
+     <label for="c61"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c61" type="text"  name="vid" value="Heat-Map" readonly>
+   <br>
+     <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+     </center><br>
+</div>
+          </form>
+
+<div id="myDIV19"style="display:none;">
+    <input type="text"  name="vid"  value="pie" readonly>
+
+</div>
+
+<div id="myDIV20"style="display:none;">
+    <input type="text"  name="vid"  value="3Dscatter" readonly>
+
+</div>
+ <form method="post" id="scatter_1" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="scatter_1">
+ <div id="myDIV21"style="display:none;">
+    <input type="text"  name="vid" value="scatterN" readonly>
+  <center>
+     <label for="c31"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c31" type="text"  name="vid" value="scatterN" readonly>
+     </center><br>
+      <label for="c32"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">x-axis(numerical):</label>
+
+       <select style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS'; " name="x" class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c32" required>
+      {% for feature in nfeat %}
+            <option value="{{feature}}">{{feature}}</option>
+            {% endfor %}
+       </select><br>
+      <label for="c33"style="float:left; font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">y-axis(numerical):</label>
+
+        <select name="y" id="c33"style=" height:85px; width:200px;font-size:17px; font-family: 'Comic Sans MS'; " class="custom-select my-1 mr-sm-2 bg-dark text-white" multiple="multiple" required>
+
+       {% for feature in nfeat %}
+      <option value="{{feature}}">{{feature}}</option>
+      {% endfor %}
+    </select><br>
+                            <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+<br>
+</div>
+ </form>
+        <form method="post" id="box_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="box_0">
+        <div id="myDIV22"style="display:none;">
+
+  <center>
+     <label for="c41"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c41" type="text"  name="vid" value="Box-Plot" readonly>
+     </center><br>
+            <center>
+             <label for="c42"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">y-axis(numerical):</label>
+
+        <select name="y" id="c42"style=" height:85px; width:200px;font-size:17px; font-family: 'Comic Sans MS'; " class="custom-select my-1 mr-sm-2 bg-dark text-white" multiple="multiple" required>
+
+       {% for feature in nfeat %}
+      <option value="{{feature}}">{{feature}}</option>
+      {% endfor %}
+    </select><br><br>
+                            <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+<br><br>
+</center>
+
+</div>
+        </form>
+          <form method="post" id="pair_0" enctype="multipart/form-data">
+ {% csrf_token %}
+   <input  type="hidden" name="form_type" value="pair_0">
+<div id="myDIV23"style="display:none;">
+    <input type="text"  name="vid"  value="Pair-Plot" readonly>
+ <center>
+     <label for="c51"style="font-size:17px; font-family: 'Comic Sans MS'; color:white;text-align:left">Plot:</label>
+
+    <input class="custom-input my-1 mr-sm-2 text-white bg-dark" style=" width:40%; color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';" id="c51" type="text"  name="vid" value="Pair-Plot" readonly>
+   <br>
+                                 <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Visualize</span></button>
+
+     </center><br>
+</div>
+          </form>
+
+<br>
+
+{% if flag == 'yes' %}
+<img style="width:100%;"src="/plot_im/{{ path1 }}" alt="plot">
+
+
+{% endif %}
+<center>
+{% if featureName != '' %}
+<div class="container  z-depth-0">{{script|safe}}<!-- Plotly chart will be drawn inside this DIV --></div>
+</center>
+<p id="demo"></p>
+    </div>
+
+
+</div>
+
+    </div>
+</div>
+</div>
+<br>
+
+
+{% endif %}
+{% endblock %}}

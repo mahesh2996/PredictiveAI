@@ -1,0 +1,102 @@
+
+    {% extends 'index1.html' %}
+{% block title %}
+Contact us@Dart
+{% endblock %}
+
+
+{% block body %}
+
+<div>
+   <nav class="top-right open">
+	<a class="disc l1" >
+		<div>Download</div>
+	</a>
+	<a class="disc l2"  >
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  >
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4" >
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+<div class="main-title1" >
+<div style="max-width:100%;"class="jumbotron cont2 container p-3 my-3 text-black">
+
+            <center style=" line-height:1.3;"style="line-height: 1.8; text-align:left;font-size:17px; font-family: 'Comic Sans MS'; " class="text-white">Contact Us</center>
+             <div style="max-width:100%; max-height: 100%; overflow:hidden;">
+
+
+
+                <form id="contact-form" action="{% url 'send_email' %}" role="form">
+                    {% csrf_token %}
+                    <div class="messages">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div style="color:yellow;line-height: 1.8;font-size:18px; font-family: 'Comic Sans MS'; class=" {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_name"style="color:black; line-height: 1.8; text-align:left;font-size:17px; font-family: 'Comic Sans MS'; " class="text-white">Name :</label>
+                                    <input  id="form_name" type="text" name="name" class="form-control"
+                                        placeholder="Your name" required="required"
+                                        data-error="Name is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div><br>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_email"style="color:black; line-height: 1.8; text-align:left;font-size:17px; font-family: 'Comic Sans MS'; " class="text-white">Email :</label>
+                                    <input  id="form_email" type="email" name="email" class="form-control"
+                                        placeholder="your email *" required="required"
+                                        data-error="Valid email is required.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_message"style="color:black; line-height: 1.8; text-align:left;font-size:17px; font-family: 'Comic Sans MS'; " class="text-white">Message :</label><br>
+                                    <textarea id="form_message" name="message" class="form-control"
+                                        placeholder="Message for me *" rows="4" required="required"
+                                        data-error="Please, leave us a message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                          <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">Send Message</span></button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            </center>
+        </div>
+    </div>
+    </div>
+{% endblock %}

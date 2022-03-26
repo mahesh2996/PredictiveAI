@@ -1,0 +1,93 @@
+{% extends 'index1.html' %}
+{% block title %}
+Imputation@Dart
+{% endblock %}
+{% block body %}
+ <div>
+   <nav class="top-right open">
+	<a class="disc l1" href="/download/processed/{{fName}}">
+		<div>Download</div>
+	</a>
+	<a class="disc l2"  href="/prediction/{{fName}}">
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  href="/visualizer3/{{fName}}" >
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4"  href="/preprocess/{{fName}}">
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+<div class="main-title1">
+
+
+ <center class=" jumbotron cont2 container cd p-3 my-3 bg-warning text-white"  >
+<center style=" line-height:1.3;" class="blinking tex ">Imputation</center>
+     <p style="color:black; line-height: 1.8; text-align:right;font-size:17px; font-family: 'Comic Sans MS'; " >{{featureName}} Feature</p>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <center style="color:black; line-height: 1.8;font-size:17px; font-family: 'Comic Sans MS'; ">Missing Values: {{nullValues}}/{{total}}</center>
+
+        <center style="color:black; line-height: 1.8;font-size:17px; font-family: 'Comic Sans MS'; ">
+
+
+     <select name="nullTreat" style="color:black; line-height: 1.8; text-align:left;font-size:15px; font-family: 'Comic Sans MS';  class="custom-select my-1 mr-sm-2 text-white bg-dark" id="c1" required>
+        <option value="">Null Value Handler</option>
+
+      <option value="ignore">Ignore</option>
+    <option value="treat">Treat with Median</option>
+
+     </select>
+        </center>
+        <br>
+  <div style=" height: 250px; overflow:auto;">
+    <div class="container  z-depth-1 a cde" >
+             <table  class="table table-dark table-hover" >
+                <thead >
+                    <tr>
+                        <th>Value</th>
+                        <th>Assume as Noise Value</th>
+                        <th>Count [{{total}}]</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    {% for feature, c in featureList %}
+                    <tr>
+                        <td>{{feature}}</td>
+                        <td>
+                            <label>
+                                <input type="checkbox" class="filled-in" name="nulls" value="{{feature}}" />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td>{{c}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+
+                         <button style="letter-spacing:2px; text-decoration:none;background-color:white;" type="submit" class="btn1 rounded button5"><span class="text-green">Save</span></button>
+                    &nbsp;&nbsp;            <a style="letter-spacing:2px; text-decoration:none;background-color:white;"class="btn1 rounded button5" href="/preprocess/{{fName}}/"><span class="text-green">Continue</span></a>
+
+
+
+</form>
+ </center>
+</div>
+{% endblock %}

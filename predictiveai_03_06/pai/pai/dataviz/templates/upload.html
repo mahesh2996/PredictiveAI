@@ -1,0 +1,165 @@
+{% extends 'index1.html' %}
+{% block title %}
+PredictiveAi.tech
+{% endblock %}
+{% block body %}
+<div>
+   <nav class="top-right open">
+	<a class="disc l1">
+		<div>Download</div>
+	</a>
+	<a class="disc l2" >
+		<div>Prediction</div>
+	</a>
+	<a class="disc l3"  >
+		<div>Visualization</div>
+	</a>
+	<a class="disc l4" >
+		<div>Preprocessor </div>
+	</a>
+	<a class="disc l5"  href="/" >
+        <div>New</div>
+	</a>
+	<a class="disc l6 toggle">
+		Menu
+	</a>
+</nav>
+<br><br>
+      <div class="topleft">
+
+
+<img style=" z-index:100;width:25%;"src="/static/images/logo.png" alt="logo">
+      </div>
+</div>
+
+<!--
+<container class="main-title">
+ <div id="164177548">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("164177548", "728x90", "164177548");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>
+    <div class="tex">
+     <div style="overflow:hidden;background-color: #7f5a83;background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);" class="jumbotron cont2 vertical-center container text-white ">
+  <div class="align-self-center">
+
+
+
+
+
+            <center style="line-height: 1.8;font-size:28px; font-family: 'Comic Sans MS'; " class="text-white"><b>DART</b></center>
+
+            <center style="line-height: 1.8;font-size:16px; font-family: 'Comic Sans MS'; " class="text-white">Data can talk,If you ready to listen</center>
+
+
+<br>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="file-field input-field" style="margin: 0% 20% 0% 20%;">
+
+            <div class="btn">
+
+
+                <input type="file" name="document" required/>
+
+            </div>
+            <br>
+                        <center style="color:white;line-height: 1.8;font-size:10px; font-family: 'Comic Sans MS'; ">#Supported files:.csv,.xls,.xlsx,.json</center>
+
+
+        </div>
+
+
+                            <center style="color:pink;line-height: 1.8;font-size:15px; font-family: 'Comic Sans MS'; ">{{msg}}</center>
+
+        <center>
+
+                                          <button style="letter-spacing:2px; text-decoration:none;background-color:white;" name="dviz" type="submit" value="yes"class="btn1 rounded button5"><span class="text-green">START</span></button>
+        </center>
+
+
+</form>
+
+
+  </div>
+           <a  style="color:yellow;text-decoration:underling; line-height: 1.8; text-align:right;font-size:14px; font-family: 'Comic Sans MS'; "href="static/images/Iris.csv" download>
+  #Sample File      </a>
+
+
+</div>
+
+        </div>
+
+            </container>-->
+            <div class="gradient">
+    <div class="box">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+     <center style="line-height: 1.8;font-size:28px; font-family: 'Comic Sans MS'; " class="text-white"><b>DART</b></center>
+
+            <center style="line-height: 1.8;font-size:16px; font-family: 'Comic Sans MS'; " class="text-white">Data can talk,If you ready to listen</center>
+
+
+<br>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div  style="color:yellow;margin: 0% 20% 0% 20%;">
+
+            <div style="float:right;" class="btn btn-primary btn-sm">
+
+
+                <input type="file" name="document" required/>
+
+            </div>
+            <br>
+                        <center style="color:white;line-height: 1.8;font-size:10px; font-family: 'Comic Sans MS'; ">#Supported files:.csv,.xls,.xlsx,.json</center>
+
+
+        </div>
+
+
+         <center style="color:yellow;line-height: 1.8;font-size:15px; font-family: 'Comic Sans MS'; ">{{msg}}</center>
+
+
+
+<button type="submit" name="" style="float:left;" class="btn btn-primary btn-sm" value="START" >START</button>
+</form>
+<br><br>
+<center>
+ <a  style="color:yellow;text-decoration:underling; line-height: 1.8; text-align:right;font-size:14px; font-family: 'Comic Sans MS'; "href="static/images/Iris.csv" download>
+  #Sample File      </a></center>
+  <br>
+
+  <div style="font-size:2rem;width:100%;text-align:center;">  😇 🔦 &#128202; 😂  </div>
+<!--  <div style="font-size:2rem;width:100%;text-align:center;"> &#128202; &#128517; &#128518; &#128200;  </div>-->
+
+  </div>
+</div>
+
+
+
+
+
+      <center>
+              <iframe   width="720" height="345" src="https://www.youtube.com/embed/Fqhd5wLVxR4"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+            <div style="margin-left: 12%;">
+                <!-- Start of WebFreeCounter Code -->
+                <div style="color:white;line-height: 1.8;font-size:18px; font-family: 'Comic Sans MS'; ">Visitors: <img src="https://www.webfreecounter.com/hit.php?id=guvaxxcn&nd=6&style=80" border="0" alt="hit counter"></div>
+
+<!-- End of WebFreeCounter Code -->
+</div>
+
+ <!--popup video-->
+
+
+{% endblock %}
